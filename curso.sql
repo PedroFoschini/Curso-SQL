@@ -36,3 +36,15 @@ OR
     )
 
 
+SELECT
+    *
+FROM
+    tb_products
+WHERE
+    product_category_name
+IN
+    ('perfumaria', 'artes')
+AND
+    product_photos_qty
+IN
+    (1, 2, 3)

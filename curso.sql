@@ -161,6 +161,7 @@ FROM
     tb_order_items
 
 
+
 SELECT
     product_id,
     product_name_lenght,
@@ -179,5 +180,114 @@ SELECT
     'divisão colunas'
 FROM
     tb_products
+
+
+
+
+SELECT
+    seller_state,
+    COUNT(
+        DISTINCT(
+        seller_city
+        )
+    )
+    AS
+    'Quantidade de cidades'
+FROM
+    tb_sellers
+GROUP BY
+    seller_state
+
+
+-- GROUP BY pode ser referênciado pela posição do select, no caso 1
+SELECT
+    order_id,
+    COUNT(
+        product_id
+    )
+FROM
+    tb_order_items
+GROUP BY
+    1
+    
+
+
+SELECT
+    DISTINCT(
+        order_id
+    ),
+    COUNT(
+        product_id
+    )
+    AS
+    qtd_prod,
+    SUM(
+        price
+    )
+    AS
+    'Valor total'
+FROM
+    tb_order_items
+GROUP BY
+    order_id
+ORDER BY
+    qtd_prod
+    DESC
+
+
+
+SELECT
+    DISTINCT(order_id),
+    COUNT(product_id) AS qtd_prod,
+    SUM(price) AS 'Valor total',
+    SUM(price) / COUNT(product_id) AS ticket_medio
+FROM
+    tb_order_items
+GROUP BY
+    order_id
+ORDER BY
+    qtd_prod ASC
+
+
+
+SELECT
+    payment_type,
+    avg(payment_installments) AS media_qtd_parcelas,
+    avg(payment_value) AS valor_medio_compra
+FROM
+    tb_order_payments
+WHERE
+    payment_type = 'credit_card'
+GROUP BY
+    payment_type
+
+
+
+
+SELECT
+    product_category_name,
+    MIN(product_photos_qty) AS qtd_minima,
+    MAX(product_photos_qty) AS qtd_maxima
+FROM
+    tb_products
+WHERE
+    product_category_name IS NOT NULL
+GROUP BY
+    product_category_name
+
+
+
+
+SELECT
+    customer_state,
+    COUNT(DISTINCT(customer_city)) AS qtd_cidades
+FROM
+    tb_customers
+GROUP BY
+    customer_state
+ORDER BY
+    customer_city DESC
+
+
 
 

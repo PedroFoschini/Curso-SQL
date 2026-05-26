@@ -291,3 +291,37 @@ ORDER BY
 
 
 
+
+SELECT
+    *
+FROM (
+    SELECT
+        order_id,
+        SUM(price) AS valor_total
+    FROM
+        tb_order_items
+    GROUP BY
+        order_id
+)
+WHERE
+    valor_total >= 1000
+
+
+
+
+
+
+SELECT
+    order_id,
+    SUM(price) as valor_total
+FROM
+    tb_order_items
+GROUP BY
+    order_id
+HAVING
+    valor_total >= 4000
+ORDER BY
+    valor_total DESC
+
+
+

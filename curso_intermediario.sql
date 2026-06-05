@@ -44,6 +44,28 @@ ORDER BY
 
 
 
+# Ruim 1 - 2
+# Neutro 3
+# Boa 4 - 5
+
+SELECT
+    CASE
+        WHEN review_score >= 1 AND review_score <= 2 then 'Ruim'
+        WHEN review_score = 3 then 'Neutro'
+        WHEN review_score in (4, 5) then 'Bom'
+    ELSE
+        'Sem score'
+    END AS review_quali,
+    COUNT(*) AS quantidade
+FROM
+    tb_order_reviews
+GROUP BY
+    review_quali
+ORDER BY
+    quantidade DESC
+
+
+
 
 
 
